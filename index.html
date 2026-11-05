@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="A pixel-art journey west. Make fifteen trail decisions and discover your Oregon ending.">
+    <title>Big Decisions: A Corporate Management Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="game.js" defer></script>
+    <script src="pixel-type.js" defer></script>
+    <script src="fullscreen.js" defer></script>
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="masthead">
+        <a class="wordmark" href="#" aria-label="Big Decisions: A Corporate Management Experience home">BD</a>
+        <p class="edition">increase share holder value!</p>
+        <div class="display-controls">
+        <button class="fullscreen-toggle" type="button" aria-pressed="false" aria-label="Enter fullscreen">FULL SCREEN</button>
+        <button class="sound-toggle" type="button" aria-pressed="false" aria-label="Toggle sound effects">
+          <span class="sound-icon" aria-hidden="true">♪</span>
+          <span class="sound-label">SOUND OFF</span>
+        </button>
+        </div>
+      </header>
+      <p class="fullscreen-status visually-hidden" role="status"></p>
+
+      <section class="scenery" aria-label="A pixel-art wagon crossing the western prairie">
+        <img class="ending-scene" alt="" hidden width="752" height="180">
+        <div class="sun"></div>
+        <div class="mountain mountain-back"></div>
+        <div class="mountain mountain-front"></div>
+        <div class="cloud cloud-one"></div>
+        <div class="cloud cloud-two"></div>
+        <svg class="wagon-scene" viewBox="0 0 360 142" shape-rendering="crispEdges" role="img" aria-labelledby="wagon-title">
+          <title id="wagon-title">A covered wagon on the trail west</title>
+          <g class="wagon">
+            <path d="M92 80h104l-9 37H103z" fill="#1f9a3a"/>
+            <path d="M105 78c2-29 17-44 39-44s39 15 42 44z" fill="#b8ffc4" stroke="#000000" stroke-width="4"/>
+            <path d="M113 76c3-24 13-34 31-34v36z" fill="#33ff55"/>
+            <path d="M144 42c17 2 28 14 31 36h-31z" fill="#b8ffc4"/>
+            <path d="M91 80h106" stroke="#000000" stroke-width="5"/>
+            <path d="M103 115h95" stroke="#000000" stroke-width="5"/>
+            <path d="M129 115l-11 13m61-13 12 13" stroke="#000000" stroke-width="4"/>
+            <circle cx="124" cy="122" r="13" fill="#33ff55" stroke="#000000" stroke-width="4"/>
+            <circle cx="124" cy="122" r="4" fill="#000000"/>
+            <circle cx="186" cy="122" r="13" fill="#33ff55" stroke="#000000" stroke-width="4"/>
+            <circle cx="186" cy="122" r="4" fill="#000000"/>
+            <path d="M198 85l47 27" stroke="#000000" stroke-width="4"/>
+            <path d="M198 92l47 27" stroke="#000000" stroke-width="3"/>
+            <path d="M199 87l9-10" stroke="#000000" stroke-width="3"/>
+            <path d="M233 110q9-14 20-6l-7 11 8 7h-22l-5-7z" fill="#33ff55"/>
+            <path d="M235 122l-3 9m15-9 4 9m-19-17-7 2" stroke="#000000" stroke-width="3"/>
+          </g>
+          <path d="M0 137q79-17 153-5t207-3v13H0z" fill="#0b3a18"/>
+          <path d="M0 137q81-9 163-1t197-5" fill="none" stroke="#33ff55" stroke-width="3" stroke-dasharray="8 8"/>
+          <g fill="#1f9a3a">
+            <path d="M28 112h7V92h6v20h5l-9-24-9 24zm226 9h6V101h6v20h5l-8-19-9 19zm69-2h6v-17h6v17h5l-8-20z"/>
+          </g>
+        </svg>
+      </section>
+
+      <section class="game-panel" aria-live="polite" aria-atomic="true">
+        <div id="game"></div>
+      </section>
+
+      <footer class="footer">
+        <a href="https://fontstruct.com/gallery/tag/9964/Oregon%20Trail" target="_blank" rel="noreferrer">PIXEL TYPE INSPIRED BY THE CLASSIC ERA ↗</a>
+      </footer>
+    </main>
+    <div class="screen-noise" aria-hidden="true"></div>
+  </body>
+</html>
