@@ -1,8 +1,6 @@
 const questions = [
   {
     title: "THE SILICON VALLEY DREAM",
-    image: "assets/questions/question-01.png",
-    imageAlt: "Pixel art of a Silicon Valley technology company office",
     prompt:
       "It is a bright Monday morning in San Jose. You walk into your new Silicon Valley office with $5 billion in VC funding and one goal: dominate the AI industry. How will you establish your physical infrastructure?",
     answers: [
@@ -397,14 +395,28 @@ function renderEnding() {
   `;
 }
 
+function selectAnswer(index) {
+  selections[currentQuestion] = index;
+  const completed = selections.filter((answer) => answer !== null).length;
+  const progress = Math.round((completed / questions.length) * 100);
+
+  game.querySelectorAll("[data-answer]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(Number(button.dataset.answer) === index));
+  });
+  game.querySelector(".progress-track").setAttribute("aria-valuenow", String(completed));
+  game.querySelector(".progress-fill").style.width = `${progress}%`;
+  game.querySelector(".trail-marker").textContent =
+    `${completed} / ${questions.length} DECISIONS COMPLETED — ${progress}%`;
+  game.querySelector('[data-action="next"]').disabled = false;
+  game.querySelector(`[data-answer="${index}"]`).focus();
+  playTone(620);
+}
+
 game.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
   if (button.hasAttribute("data-answer")) {
-    selections[currentQuestion] = Number(button.dataset.answer);
-    playTone(620);
-    renderQuestion();
-    game.querySelector(`[data-answer="${selections[currentQuestion]}"]`).focus();
+    selectAnswer(Number(button.dataset.answer));
     return;
   }
   switch (button.dataset.action) {
@@ -459,10 +471,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key >= "1" && event.key <= "4") {
     event.preventDefault();
     const index = Number(event.key) - 1;
-    selections[currentQuestion] = index;
-    playTone(620);
-    renderQuestion();
-    game.querySelector(`[data-answer="${index}"]`).focus();
+    selectAnswer(index);
   }
   if (event.key === "Enter" && selections[currentQuestion] !== null) {
     event.preventDefault();
