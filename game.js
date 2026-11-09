@@ -1,11 +1,27 @@
 const questions = [
   {
-    prompt: "Your wagon is being packed. What matters most?",
+    title: "THE SILICON VALLEY DREAM",
+    image: "assets/questions/question-01.png",
+    imageAlt: "Pixel art of a Silicon Valley technology company office",
+    prompt:
+      "It is a bright Monday morning in San Jose. You walk into your new Silicon Valley office with $5 billion in VC funding and one goal: dominate the AI industry. How will you establish your physical infrastructure?",
     answers: [
-      ["Pack tools and sturdy, repairable goods.", "steward"],
-      ["Travel light and leave room for discoveries.", "trailblazer"],
-      ["Bring extra blankets to share with neighbors.", "community"],
-      ["Stock medicines and enough food for delays.", "survivor"],
+      [
+        "Rent server racks at an established data center to avoid construction costs.",
+        "steward",
+      ],
+      [
+        "Build our first data center in Arlington, Texas.",
+        "survivor",
+      ],
+      [
+        "Raise more funding and begin construction on five data centers.",
+        "trailblazer",
+      ],
+      [
+        "Close the startup.",
+        "community",
+      ],
     ],
   },
   {
@@ -228,31 +244,114 @@ function renderIntro() {
 function renderQuestion() {
   screen = "question";
   updateScenery();
+
   const question = questions[currentQuestion];
   const selected = selections[currentQuestion];
-  const progress = Math.round(((currentQuestion + 1) / questions.length) * 100);
+
+  // Count answers selected, not just questions visited.
+  const completed = selections.filter(
+    (answer) => answer !== null
+  ).length;
+
+  const progress = Math.round(
+    (completed / questions.length) * 100
+  );
+
+  // Only display images for questions that have one.
+  const imageHTML = question.image
+    ? `
+      <div class="scenario-image-container">
+        <img
+          class="scenario-image"
+          src="${question.image}"
+          alt="${question.imageAlt || "Scenario illustration"}"
+        >
+      </div>
+    `
+    : "";
+
   game.innerHTML = `
     <div class="progress-area">
-      <div class="progress-label"><span>TRAIL JOURNAL</span><span>DAY ${String(currentQuestion + 1).padStart(2, "0")} / 15</span></div>
-      <div class="progress-track" role="progressbar" aria-label="Journey progress" aria-valuemin="0" aria-valuemax="15" aria-valuenow="${currentQuestion + 1}">
-        <div class="progress-fill" style="width: ${progress}%"></div>
+      <div class="progress-label">
+        <span>CEO DECISION LOG</span>
+        <span>
+          DECISION ${String(currentQuestion + 1).padStart(2, "0")}
+          / ${String(questions.length).padStart(2, "0")}
+        </span>
       </div>
-      <p class="trail-marker">✦ &nbsp; A choice changes the shape of your journey.</p>
+
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-label="Decisions completed"
+        aria-valuemin="0"
+        aria-valuemax="${questions.length}"
+        aria-valuenow="${completed}"
+      >
+        <div
+          class="progress-fill"
+          style="width: ${progress}%"
+        ></div>
+      </div>
+
+      <p class="trail-marker">
+        ${completed} / ${questions.length}
+        DECISIONS COMPLETED — ${progress}%
+      </p>
     </div>
-    <h2 class="question-copy" tabindex="-1">${question.prompt}</h2>
-    <div class="answer-list" role="group" aria-label="Choose your response">
-      ${question.answers.map(([answer, profile], index) => `
-        <button class="answer-button" type="button" data-answer="${index}" aria-pressed="${selected === index}">
-          <span class="answer-key" aria-hidden="true">${String.fromCharCode(65 + index)}</span>
-          <span>${answer}</span>
+
+    <div class="scenario-card">
+      <p class="scenario-heading">
+        ${question.title || "EXECUTIVE DECISION"}
+      </p>
+
+      ${imageHTML}
+
+      <h2 class="question-copy" tabindex="-1">
+        ${question.prompt}
+      </h2>
+    </div>
+
+    <div class="answer-list" role="group"
+         aria-label="Choose your response">
+      ${question.answers.map(([answer], index) => `
+        <button
+          class="answer-button"
+          type="button"
+          data-answer="${index}"
+          aria-pressed="${selected === index}"
+        >
+          <span class="answer-key" aria-hidden="true">
+            ${String.fromCharCode(65 + index)}
+          </span>
+          <span class="answer-text">${answer}</span>
         </button>
       `).join("")}
     </div>
+
     <div class="question-controls">
-      <button class="back-button" type="button" data-action="back">← ${currentQuestion === 0 ? "Start" : "Previous"}</button>
-      <span class="keyboard-hint">TIP: USE KEYS 1–4 TO CHOOSE</span>
-      <button class="next-button" type="button" data-action="next" ${selected === null ? "disabled" : ""}>
-        ${currentQuestion === questions.length - 1 ? "SEE YOUR ENDING" : "NEXT"} <span class="button-arrow" aria-hidden="true">→</span>
+      <button
+        class="back-button"
+        type="button"
+        data-action="back"
+      >
+        ← ${currentQuestion === 0 ? "START" : "PREVIOUS"}
+      </button>
+
+      <span class="keyboard-hint">
+        USE KEYS 1–4 TO SELECT
+      </span>
+
+      <button
+        class="next-button"
+        type="button"
+        data-action="next"
+        ${selected === null ? "disabled" : ""}
+      >
+        ${currentQuestion === questions.length - 1
+          ? "SEE YOUR ENDING"
+          : "CONTINUE"}
+        <span class="button-arrow" aria-hidden="true">→</span>
       </button>
     </div>
   `;
