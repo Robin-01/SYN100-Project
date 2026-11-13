@@ -1,189 +1,41 @@
-const questions = [
-  {
-    title: "THE SILICON VALLEY DREAM",
-    prompt:
-      "It is a bright Monday morning in San Jose. You walk into your new Silicon Valley office with $5 billion in VC funding and one goal: dominate the AI industry. How will you establish your physical infrastructure?",
-    answers: [
-      [
-        "Rent server racks at an established data center to avoid construction costs.",
-        "steward",
-      ],
-      [
-        "Build our first data center in Arlington, Texas.",
-        "survivor",
-      ],
-      [
-        "Raise more funding and begin construction on five data centers.",
-        "trailblazer",
-      ],
-      [
-        "Close the startup.",
-        "community",
-      ],
-    ],
-  },
-  {
-    prompt: "At the outfitter, your budget is tight. What do you buy?",
-    answers: [
-      ["A good repair kit that will last the whole trip.", "steward"],
-      ["A detailed map of lesser-known routes.", "trailblazer"],
-      ["Extra provisions for the whole wagon party.", "community"],
-      ["A sturdy canvas cover and emergency supplies.", "survivor"],
-    ],
-  },
-  {
-    prompt: "A broad river blocks the trail. The water is rising.",
-    answers: [
-      ["Take time to reinforce the wagon before crossing.", "steward"],
-      ["Scout upstream for an unmarked ford.", "trailblazer"],
-      ["Join other travelers to cross together.", "community"],
-      ["Wait for calmer water, even if it costs a day.", "survivor"],
-    ],
-  },
-  {
-    prompt: "A wheel cracks miles from the nearest settlement.",
-    answers: [
-      ["Repair it carefully with the spare parts you saved.", "steward"],
-      ["Try a new fix using whatever the trail provides.", "trailblazer"],
-      ["Ask nearby travelers to lend a hand.", "community"],
-      ["Unload the wagon and make a slow, safe repair.", "survivor"],
-    ],
-  },
-  {
-    prompt: "You reach a fork in the trail. Which way do you go?",
-    answers: [
-      ["The well-traveled route with reliable water stops.", "steward"],
-      ["The shorter mountain pass no one has tried this year.", "trailblazer"],
-      ["The route where another family needs a travel partner.", "community"],
-      ["The longer path with the gentlest terrain.", "survivor"],
-    ],
-  },
-  {
-    prompt: "The midday sun is fierce, and the water runs low.",
-    answers: [
-      ["Ration water and look for a sustainable refill point.", "steward"],
-      ["Push ahead to reach the river marked on your map.", "trailblazer"],
-      ["Share what remains so everyone can keep going.", "community"],
-      ["Rest in the shade until it is safe to travel again.", "survivor"],
-    ],
-  },
-  {
-    prompt: "A traveler on the trail has fallen ill. What do you do?",
-    answers: [
-      ["Offer herbs and supplies from your carefully packed kit.", "steward"],
-      ["Ride ahead to find the nearest doctor.", "trailblazer"],
-      ["Stay and help their family care for them.", "community"],
-      ["Set up a clean, quiet camp and monitor their fever.", "survivor"],
-    ],
-  },
-  {
-    prompt: "You reach a trading post with room for one more item.",
-    answers: [
-      ["A hand tool to mend or make things along the way.", "steward"],
-      ["A compass to explore beyond the marked trail.", "trailblazer"],
-      ["A board game to lift everyone's spirits.", "community"],
-      ["A kettle to boil drinking water at camp.", "survivor"],
-    ],
-  },
-  {
-    prompt: "Storm clouds gather over a stretch of open prairie.",
-    answers: [
-      ["Secure loose cargo so nothing is wasted or lost.", "steward"],
-      ["Make for the distant tree line before the storm hits.", "trailblazer"],
-      ["Bring nearby travelers into your camp for shelter.", "community"],
-      ["Pitch camp early in a sheltered spot and wait it out.", "survivor"],
-    ],
-  },
-  {
-    prompt: "You find a meadow full of wildflowers beside the trail.",
-    answers: [
-      ["Leave it untouched for the travelers who come after.", "steward"],
-      ["Explore the ridge for a better view of the valley.", "trailblazer"],
-      ["Stop so the children can gather and press a few flowers.", "community"],
-      ["Take the chance to rest and check everyone's health.", "survivor"],
-    ],
-  },
-  {
-    prompt: "Another wagon's supplies have spilled across the trail.",
-    answers: [
-      ["Help salvage and repack what can still be used.", "steward"],
-      ["Keep moving; the weather window is closing.", "trailblazer"],
-      ["Stop and help the family gather every last bundle.", "community"],
-      ["Check for injuries before anyone starts to lift.", "survivor"],
-    ],
-  },
-  {
-    prompt: "The trail is blocked by a fallen tree. Night is coming.",
-    answers: [
-      ["Cut a careful path and save the wood for the fire.", "steward"],
-      ["Climb the ridge and find a way around.", "trailblazer"],
-      ["Organize everyone into teams to clear it together.", "community"],
-      ["Make camp and tackle the obstacle in daylight.", "survivor"],
-    ],
-  },
-  {
-    prompt: "You meet a local guide who offers advice for the crossing.",
-    answers: [
-      ["Ask how to travel without damaging the riverbank.", "steward"],
-      ["Ask about a hidden route to the far side.", "trailblazer"],
-      ["Listen closely and offer a fair trade for their time.", "community"],
-      ["Ask which crossing is safest for your whole party.", "survivor"],
-    ],
-  },
-  {
-    prompt: "A companion wants to press on, but looks exhausted.",
-    answers: [
-      ["Reorganize the load so the wagon rolls more easily.", "steward"],
-      ["Take the lead and promise a rest at the next landmark.", "trailblazer"],
-      ["Let the group decide together when to stop.", "community"],
-      ["Call an early halt; health comes before the schedule.", "survivor"],
-    ],
-  },
-  {
-    prompt: "The Willamette Valley is finally in view. What comes next?",
-    answers: [
-      ["Build a home from what the land can renew.", "steward"],
-      ["Keep exploring; the next horizon is calling.", "trailblazer"],
-      ["Help your traveling companions find a place nearby.", "community"],
-      ["Settle somewhere safe and give the family time to recover.", "survivor"],
-    ],
-  },
-];
+import { questions } from "./questions.js";
 
-const profiles = {
-  steward: {
-    image: "assets/endings/steward.svg",
-    imageAlt: "A well-kept cabin, growing crops, and a covered wagon in a green valley.",
-    label: "Steward",
-    title: "Keeper of the Valley",
-    description: "You made every mile count. In Oregon, your well-kept tools, careful choices, and respect for the land help a new home take root — and leave the trail a little better for the next wagon.",
+// Earth illustration outcomes for the game
+const earthOutcomes = {
+  utopia: {
+    title: "A Sustainable Future",
+    label: "Utopia",
+    description:
+      "Your decisions prioritized responsible growth, environmental protection, and public accountability. Your company helped build a more sustainable future.",
+    image: "assets/endings/utopia.png", // name of img file for this outcome
     icon: "✦",
   },
-  trailblazer: {
-    image: "assets/endings/trailblazer.svg",
-    imageAlt: "A covered wagon and an explorer following a winding trail toward mountain peaks.",
-    label: "Trailblazer",
-    title: "The Far-Horizon Pioneer",
-    description: "You never let the unknown turn you around. Your bold spirit carries you to Oregon with stories, maps, and a knack for finding a way where no trail seemed to be.",
-    icon: "↗",
-  },
-  community: {
-    image: "assets/endings/community.svg",
-    imageAlt: "Traveling companions gathered between cabins in a welcoming new settlement.",
-    label: "Community",
-    title: "The New Neighbor",
-    description: "You crossed the plains by making sure no one crossed alone. Your wagon may not have been the first to arrive, but a circle of friends arrives with you — and that is a fine start to any town.",
-    icon: "♥",
-  },
-  survivor: {
-    image: "assets/endings/survivor.svg",
-    imageAlt: "A sheltered wagon, tent, and glowing campfire beneath the night sky.",
-    label: "Survival",
-    title: "The Steady Hand",
-    description: "You knew when to wait, when to shelter, and when to put your people first. You reach Oregon ready to rest, rebuild, and make a home that can weather whatever comes next.",
+  hopeful: {
+    title: "A Future Worth Improving",
+    label: "Not Bad",
+    description:
+      "Your company balanced growth with some responsible decisions. The world still faces challenges, but there is room to improve.",
+    image: "assets/endings/not-bad.png", // name of img file for this outcome
     icon: "◆",
   },
+  damaged: {
+    title: "A World Under Strain",
+    label: "WALL-E",
+    description:
+      "Rapid technological expansion came at a significant environmental cost. Waste, resource consumption, and infrastructure demands have left lasting damage.",
+    image: "assets/endings/wall-e.png", // name of img file for this outcome
+    icon: "!",
+  },
+  collapse: {
+    title: "An Unsustainable Future",
+    label: "Environmental Collapse",
+    description:
+      "The pursuit of unchecked growth overwhelmed environmental safeguards and public accountability, leaving the planet in crisis.",
+    image: "assets/endings/collapse.png", // name of img file for this outcome
+    icon: "×",
+  },
 };
+
 
 const game = document.querySelector("#game");
 const soundButton = document.querySelector(".sound-toggle");
@@ -209,65 +61,130 @@ function playTone(frequency = 520, duration = 0.06) {
   oscillator.stop(audioContext.currentTime + duration);
 }
 
-function updateScenery(profile = null) {
+
+function updateScenery(outcome = null) {
   const scenery = document.querySelector(".scenery");
   const image = scenery.querySelector(".ending-scene");
-  scenery.classList.toggle("show-ending", Boolean(profile));
-  image.hidden = !profile;
-  if (profile) {
-    image.src = profile.image;
-    image.alt = profile.imageAlt;
-    scenery.setAttribute("aria-label", profile.title);
-  } else {
+
+  // Invalidate any previous image-loading callbacks.
+  const requestId = String(
+    Number(image.dataset.requestId || 0) + 1
+  );
+  image.dataset.requestId = requestId;
+
+  const isQuestion = screen === "question";
+
+  const imagePath = outcome
+    ? outcome.image
+    : isQuestion
+      ? `assets/questions-img/question-${String(
+          currentQuestion + 1
+        ).padStart(2, "0")}.png`
+      : null;
+
+  scenery.classList.toggle(
+    "show-ending",
+    Boolean(imagePath)
+  );
+
+  image.hidden = true;
+  image.onload = null;
+  image.onerror = null;
+
+  if (!imagePath) {
     image.removeAttribute("src");
-    image.alt = "";
-    scenery.setAttribute("aria-label", "A pixel-art wagon crossing the western prairie");
+    scenery.classList.remove("show-ending");
+    scenery.setAttribute(
+      "aria-label",
+      "Retro game scenery"
+    );
+    return;
   }
+
+  image.alt = outcome
+    ? outcome.title
+    : `Illustration for decision ${currentQuestion + 1}`;
+
+  scenery.setAttribute("aria-label", image.alt);
+
+  image.onload = () => {
+    if (image.dataset.requestId === requestId) {
+      image.hidden = false;
+    }
+  };
+
+  image.onerror = () => {
+    if (image.dataset.requestId === requestId) {
+      image.hidden = true;
+      scenery.classList.remove("show-ending");
+    }
+  };
+
+  image.src = imagePath;
 }
+
+
 
 function renderIntro() {
   screen = "intro";
   updateScenery();
+
   game.innerHTML = `
-    <p class="eyebrow">A journey of 15 choices</p>
-    <h1 tabindex="-1">Big Decisions: A Corporate Management Experience</h1>
-    <p class="intro-copy">The valley is a thousand miles away, the wagon is waiting, and the trail has a way of surprising you. <strong>How you travel will shape the story you bring home.</strong></p>
-    <button class="start-button" type="button" data-action="start">
-      START <span class="button-arrow" aria-hidden="true">→</span>
+    <p class="eyebrow">
+      A journey of ${questions.length} decisions
+    </p>
+
+    <h1 tabindex="-1">
+      Big Decisions: A Corporate Management Experience
+    </h1>
+
+    <p class="intro-copy">
+      You are the CEO of a rapidly growing artificial
+      intelligence company. Every decision will shape
+      your business, the communities around you, and
+      the future of the planet.
+      <strong>How will you lead?</strong>
+    </p>
+
+    <button class="start-button"
+            type="button"
+            data-action="start">
+      START
+      <span class="button-arrow" aria-hidden="true">
+        →
+      </span>
     </button>
-    <p class="intro-note">15 decisions · 4 possible endings · about 4 minutes</p>
+
+    <p class="intro-note">
+      ${questions.length} decisions ·
+      4 possible Earth outcomes
+    </p>
   `;
 }
 
+
 function renderQuestion() {
   screen = "question";
+
+  // Update the image displayed above the progress bar.
+  // Image paths are handled automatically by updateScenery().
   updateScenery();
 
+  // Get the current question and previously selected answer.
   const question = questions[currentQuestion];
   const selected = selections[currentQuestion];
 
-  // Count answers selected, not just questions visited.
+  // Count how many questions have been answered.
   const completed = selections.filter(
     (answer) => answer !== null
   ).length;
 
+  // Calculate progress percentage.
   const progress = Math.round(
     (completed / questions.length) * 100
   );
 
-  // Only display images for questions that have one.
-  const imageHTML = question.image
-    ? `
-      <div class="scenario-image-container">
-        <img
-          class="scenario-image"
-          src="${question.image}"
-          alt="${question.imageAlt || "Scenario illustration"}"
-        >
-      </div>
-    `
-    : "";
-
+  // Render the question screen.
   game.innerHTML = `
     <div class="progress-area">
       <div class="progress-label">
@@ -303,28 +220,39 @@ function renderQuestion() {
         ${question.title || "EXECUTIVE DECISION"}
       </p>
 
-      ${imageHTML}
-
       <h2 class="question-copy" tabindex="-1">
         ${question.prompt}
       </h2>
     </div>
 
-    <div class="answer-list" role="group"
-         aria-label="Choose your response">
-      ${question.answers.map(([answer], index) => `
-        <button
-          class="answer-button"
-          type="button"
-          data-answer="${index}"
-          aria-pressed="${selected === index}"
-        >
-          <span class="answer-key" aria-hidden="true">
-            ${String.fromCharCode(65 + index)}
-          </span>
-          <span class="answer-text">${answer}</span>
-        </button>
-      `).join("")}
+    <div
+      class="answer-list"
+      role="group"
+      aria-label="Choose your response"
+    >
+      ${question.answers
+        .map(
+          ([answer], index) => `
+            <button
+              class="answer-button"
+              type="button"
+              data-answer="${index}"
+              aria-pressed="${selected === index}"
+            >
+              <span
+                class="answer-key"
+                aria-hidden="true"
+              >
+                ${String.fromCharCode(65 + index)}
+              </span>
+
+              <span class="answer-text">
+                ${answer}
+              </span>
+            </button>
+          `
+        )
+        .join("")}
     </div>
 
     <div class="question-controls">
@@ -346,54 +274,151 @@ function renderQuestion() {
         data-action="next"
         ${selected === null ? "disabled" : ""}
       >
-        ${currentQuestion === questions.length - 1
-          ? "SEE YOUR ENDING"
-          : "CONTINUE"}
-        <span class="button-arrow" aria-hidden="true">→</span>
+        ${
+          currentQuestion === questions.length - 1
+            ? "SEE YOUR ENDING"
+            : selected !== null &&
+                question.answers[selected][1] === "quit"
+              ? "CLOSE STARTUP"
+              : "CONTINUE"
+        }
+
+        <span
+          class="button-arrow"
+          aria-hidden="true"
+        >
+          →
+        </span>
       </button>
     </div>
   `;
 }
 
 function getOutcome() {
-  const scores = Object.fromEntries(Object.keys(profiles).map((profile) => [profile, 0]));
-  selections.forEach((selection, index) => {
-    const profile = questions[index].answers[selection][1];
-    scores[profile] += 1;
-  });
-  const highestScore = Math.max(...Object.values(scores));
-  const tied = Object.keys(scores).filter((profile) => scores[profile] === highestScore);
-  // Scan backward so the latest answer among tied approaches wins.
-  const winner = selections.reduceRight((found, selection, index) =>
-    found ?? (tied.includes(questions[index].answers[selection][1])
-      ? questions[index].answers[selection][1] : null), null);
-  return { winner, scores };
+  const totalScore = selections.reduce(
+    (total, selection, index) => {
+      if (selection === null) return total;
+
+      const score =
+        questions[index].answers[selection][1];
+
+      return total +
+        (typeof score === "number" ? score : 0);
+    },
+    0
+  );
+
+  let outcomeKey;
+
+  if (totalScore >= 16) {
+    outcomeKey = "utopia";
+  } else if (totalScore >= 1) {
+    outcomeKey = "hopeful";
+  } else if (totalScore >= -14) {
+    outcomeKey = "damaged";
+  } else {
+    outcomeKey = "collapse";
+  }
+
+  return {
+    totalScore,
+    outcome: earthOutcomes[outcomeKey],
+  };
 }
 
 function renderEnding() {
   screen = "ending";
-  const { winner, scores } = getOutcome();
-  const profile = profiles[winner];
-  updateScenery(profile);
+
+  const { totalScore, outcome } = getOutcome();
+
+  updateScenery(outcome);
+
   game.innerHTML = `
-    <p class="eyebrow">Your trail story · Journey complete</p>
+    <p class="eyebrow">
+      Your decisions have shaped the future
+    </p>
+
     <div class="ending-card">
-      <p class="eyebrow">${profile.icon} &nbsp; YOUR OREGON ENDING</p>
-      <h1 class="ending-title" tabindex="-1">${profile.title}</h1>
-      <p class="ending-copy">${profile.description}</p>
-      <div class="ending-stats" aria-label="Your trail choices by approach">
-        ${Object.entries(profiles).map(([key, item]) => `
-          <div class="stat"><span class="stat-label">${item.label}</span><span class="stat-value">${scores[key]}</span></div>
-        `).join("")}
+      <p class="eyebrow">
+        ${outcome.icon} YOUR EARTH OUTCOME
+      </p>
+
+      <h1 class="ending-title" tabindex="-1">
+        ${outcome.title}
+      </h1>
+
+      <p class="ending-copy">
+        ${outcome.description}
+      </p>
+
+      <div class="ending-stats">
+        <div class="stat">
+          <span class="stat-label">
+            Sustainability Score
+          </span>
+          <span class="stat-value">
+            ${totalScore} / +30
+          </span>
+        </div>
       </div>
+
       <div class="ending-actions">
-        <button class="restart-button" type="button" data-action="restart">TRAVEL AGAIN ↻</button>
-        <button class="back-button" type="button" data-action="review">← Review last choice</button>
+        <button class="restart-button"
+                type="button"
+                data-action="restart">
+          PLAY AGAIN ↻
+        </button>
+
+        <button class="back-button"
+                type="button"
+                data-action="review">
+          ← Review last choice
+        </button>
       </div>
     </div>
-    <p class="ending-footnote">Your ending reflects the approach you chose most often. Ties are settled by your latest trail choice.</p>
+
+    <p class="ending-footnote">
+      Your outcome reflects the cumulative impact
+      of your decisions throughout the simulation.
+    </p>
   `;
 }
+
+function renderQuit() {
+  screen = "quit";
+  updateScenery();
+
+  game.innerHTML = `
+    <div class="ending-card">
+      <p class="eyebrow">STARTUP CLOSED</p>
+
+      <h1 class="ending-title" tabindex="-1">
+        The End of Your Journey
+      </h1>
+
+      <p class="ending-copy">
+        You decided to close your startup before
+        beginning your journey into the AI industry.
+        Your company never entered the race.
+      </p>
+
+      <div class="ending-actions">
+        <button class="restart-button"
+                type="button"
+                data-action="restart">
+          START AGAIN ↻
+        </button>
+
+        <button class="back-button"
+                type="button"
+                data-action="review">
+          ← Change your decision
+        </button>
+      </div>
+    </div>
+  `;
+}
+
 
 function selectAnswer(index) {
   selections[currentQuestion] = index;
@@ -408,6 +433,22 @@ function selectAnswer(index) {
   game.querySelector(".trail-marker").textContent =
     `${completed} / ${questions.length} DECISIONS COMPLETED — ${progress}%`;
   game.querySelector('[data-action="next"]').disabled = false;
+  const nextButton = game.querySelector('[data-action="next"]');
+  const isQuit =
+    questions[currentQuestion].answers[index][1] === "quit";
+
+  const isLastQuestion =
+    currentQuestion === questions.length - 1;
+
+  nextButton.innerHTML = `
+    ${isQuit
+      ? "CLOSE STARTUP"
+      : isLastQuestion
+        ? "SEE YOUR ENDING"
+        : "CONTINUE"}
+
+    <span class="button-arrow" aria-hidden="true">→</span>
+  `;
   game.querySelector(`[data-answer="${index}"]`).focus();
   playTone(620);
 }
@@ -425,16 +466,28 @@ game.addEventListener("click", (event) => {
       playTone(440, 0.1);
       renderQuestion();
       break;
-    case "next":
-      if (selections[currentQuestion] === null) return;
-      if (currentQuestion === questions.length - 1) {
+
+    case "next": {
+      const selected = selections[currentQuestion];
+      if (selected === null) return;
+
+      const choice = questions[currentQuestion]
+        .answers[selected][1];
+
+      if (choice === "quit") {
+        renderQuit();
+      } else if (
+        currentQuestion === questions.length - 1
+      ) {
         renderEnding();
       } else {
         currentQuestion += 1;
         playTone(500);
         renderQuestion();
       }
+
       break;
+    }
     case "back":
       if (currentQuestion === 0) {
         currentQuestion = -1;
@@ -450,7 +503,8 @@ game.addEventListener("click", (event) => {
       renderIntro();
       break;
     case "review":
-      currentQuestion = questions.length - 1;
+      currentQuestion =
+          screen === "quit" ? 0 : questions.length - 1;
       renderQuestion();
       break;
   }
