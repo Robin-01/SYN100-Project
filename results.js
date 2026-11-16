@@ -1,5 +1,5 @@
 
-const RESULTS_ENDPOINT = "1ItnW2s3RA91cgfSdGWra4wMZKvHi0XdD1u_7MYJR1Ew";
+const RESULTS_ENDPOINT = "https://script.google.com/a/macros/ucsd.edu/s/AKfycbyvgsool_xDLR6KSsqJAhjp-PCS1-MkVegpBZ8pK5l8Bj54l89YvmmXAG5RcPvSedNJmQ/exec";
 
 (() => {
   const storageKey = "big-decisions-results-v1";
