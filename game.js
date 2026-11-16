@@ -328,9 +328,11 @@ function getOutcome() {
 
 function renderEnding() {
   screen = "ending";
-
   const { totalScore, outcome } = getOutcome();
-
+  window.dispatchEvent(new CustomEvent("quiz:completed", {
+    detail: { winner: outcome.label, totalScore,
+      answers: selections.map((answer) => answer + 1) },
+  }));
   updateScenery(outcome);
 
   game.innerHTML = `
@@ -498,6 +500,7 @@ game.addEventListener("click", (event) => {
       }
       break;
     case "restart":
+      window.dispatchEvent(new Event("quiz:restart"));
       selections = Array(questions.length).fill(null);
       currentQuestion = -1;
       renderIntro();
