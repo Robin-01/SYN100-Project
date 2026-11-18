@@ -43,9 +43,32 @@ not verified assessment scores. No names or email addresses are collected.
 If the quiz questions change, update the quiz version and the server validation
 (currently 15 questions with four choices each).
 
-
-
 Quiz version 2 uses the sustainability scoring system. Redeploy the updated
 `google-apps-script.js` before collecting results; it writes to Results v2 to
 keep the previous score format separate. `RESULTS_ENDPOINT` must be the Apps
 Script deployment URL ending in `/exec`, not the spreadsheet ID.
+
+## Where Things Live
+
+The project uses HTML, CSS, and vanilla JavaScript. Game logic, question content, outcome definitions, and visual assets are organized into separate files to make the game easier to maintain and extend.
+
+| File / Directory | Purpose |
+|---|---|
+| `index.html` | Main HTML entry point. Defines the game layout, scenery container, and game panel. |
+| `styles.css` | Controls the retro visual design, layout, animations, question screens, and Earth outcome screens. |
+| `game.js` | Main game controller. Handles screen transitions, player selections, scoring, question rendering, and final results. |
+| `questions.js` | Contains the 15 decision-making scenarios, answer choices, associated scores, and question image paths. |
+| `earth-outcomes-screen.js` | Defines the four possible Earth outcomes, including their score ranges, illustrations, strengths, weaknesses, and recommendations. |
+| `results.js` | Handles quiz completion data and its integration with the results-recording system. |
+| `google-apps-script.js` | Contains the Google Apps Script integration used for recording quiz results. |
+| `assets/questions-img/` | Stores illustrations displayed during individual questions. |
+| `assets/endings/` | Stores the illustrations displayed for the four possible Earth outcomes. |
+
+### How the Files Work Together
+
+1. `index.html` loads the game interface and supporting scripts.
+2. `game.js` retrieves questions from `questions.js` and displays them sequentially.
+3. Each player decision contributes to a cumulative score.
+4. After the final question, `game.js` determines the appropriate outcome using the definitions in `earth-outcomes-screen.js`.
+5. The results screen displays the corresponding Earth illustration, score, strengths, weaknesses, and recommendations.
+6. Upon completion, the game dispatches a `quiz:completed` event that `results.js` can use to record the player's responses.
