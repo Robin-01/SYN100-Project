@@ -1,6 +1,7 @@
 export const questions = [
   {
     title: "THE SILICON VALLEY DREAM",
+    image: "assets/questions-img/money.jpg",
     prompt: `It is a bright Monday morning in San Jose. You walk into your new Silicon Valley office with 5 billion dollars of VC money and one thing on your mind: dominating the AI space. What is your first course of action with regards to setting up your physical infrastructure?`,
     answers: [
       ["Rent server racks at an already established datacenter, we can avoid the costs of building our own.", 2],
@@ -11,6 +12,7 @@ export const questions = [
   },
   {
     title: "THE MARKETING CAMPAIGN",
+    image: "assets/questions-img/cubicle_animation.jpg",
     prompt: `Your chief marketing officer comes into your office one morning with a new proposal: a nationwide ad blitz for our new physical AI companion product. He offers you four separate ad campaigns you could run.`,
     answers: [
       ["A campaign emphasizing the fashionability of our newest AI companion products, and their cheap price tag. The ads show people having five or six of them, almost like pets.", -2],
@@ -21,6 +23,7 @@ export const questions = [
   },
   {
     title: "THE DATACENTER PROTEST",
+    image: "assets/questions-img/shouting_man.jpg",
     prompt: `An engineer comes running into your office one morning. He exclaims, "Our Arlington data center can't run today, protestors have overrun the place!" How do you respond?`,
     answers: [
       ["Call up the governor and tell him to send in the national guard, these datacenters are an essential piece of infrastructure, we need it back online ASAP!", -2],
@@ -31,6 +34,7 @@ export const questions = [
   },
   {
     title: "THE NEXT GENERATION CHIP",
+    image: "assets/questions-img/chip_animation.jpg",
     prompt: `A surprise round of new funding has hit our accounts, it is earmarked for development of a new chip. How do we proceed?`,
     answers: [
       ["We need to overtake the competitors, cut corners and produce the cheapest, fastest possible chip in order to get it to market faster than NVIDIA can.", -2],
@@ -41,6 +45,7 @@ export const questions = [
   },
   {
     title: "YEAR 2: THE ENERGY CRISIS",
+    image: "assets/questions-img/pissed_off_earth.jpg",
     prompt: `Your company is growing faster than any of the Wall Street boys or politicians could have guessed, but so is the electric bill. A utility rep from Grand Rapids, the site of one of our oldest data centers, has just informed us we have "exceeded the limit put in place by the city on how much electricity we can use without a long term plan". How do you respond?`,
     answers: [
       ["A neighboring coal plant has offered us a cheap contract which will satisfy all of our energy needs. It is by far the easiest and cheapest option, sounds like a no brainer!", -2],
@@ -51,6 +56,7 @@ export const questions = [
   },
   {
     title: "THE PRESIDENTIAL ROUNDTABLE",
+    image: "assets/questions-img/us_flag.jpg",
     prompt: `It seems our company is really making a splash, we just received an invitation from the President to attend a roundtable meeting with other industry leaders. Your chief strategist has presented you with an array of different approaches you can take at the meeting. This is a huge opportunity to influence both policy in DC, as well as other CEOs in the space. Which strategy will you choose?`,
     answers: [
       ["It would be prudent to emphasize our unique approach to artificial intelligence, one which emphasizes introducing artificial intelligence infrastructure into everyday life in sustainable ways. Chiefly through the development of dedicated renewable energy infrastructure with which we can keep our data centers running. Hopefully we can influence the President to introduce policy mandating this for other companies.", 2],
@@ -61,6 +67,7 @@ export const questions = [
   },
   {
     title: "THE INVESTOR ULTIMATUM",
+    image: "assets/questions-img/man_fuming.jpg",
     prompt: `A group of your investors are angry at your previous attempts to please the public because in their words, "Who cares about people who don't affect our wallet. They will get over it." They want you to prepare a plan going into the next year that will put the company first. What do you do?`,
     answers: [
       ["These investors have lost their minds! Do they not realize that it is only by the grace of the public that we can operate?", 2],
@@ -71,6 +78,7 @@ export const questions = [
   },
   {
     title: "THE AGENTIC AI RACE",
+    image: "assets/questions-img/chip_animation.jpg",
     prompt: `The world of AI is changing, we have moved from the early stages of chatbots to more agentic intelligence. In order to compete with new frontier models we may need to retool our products. What will you do?`,
     answers: [
       ["There is no need to invest even more in training new models, what we have now is doing its job and we can compete on the broader consumer market with our chatbot models.", 2],
@@ -81,6 +89,7 @@ export const questions = [
   },
   {
     title: "THE WIRED INTERVIEW",
+    image: "assets/questions-img/people_group.jpg",
     prompt: `You are doing your work for the day when one of your interns comes into your office. She explains to you that Wired, one of the biggest technology magazines in the country, is clamoring to get an interview with the CEO of the hottest AI company on the market. What will you emphasize in this interview?`,
     answers: [
       ["I will focus on the unprecedented speed and success of our data center rollout, I hope that our rapid expansion in that field can serve as a model on which other companies can iterate.", -2],
@@ -91,6 +100,7 @@ export const questions = [
   },
   {
     title: "THE MIDTERM ELECTIONS",
+    image: "assets/questions-img/scroll.jpg",
     prompt: `Last night the midterm elections happened, there was a huge popular backlash against the datacenter buildout and several anti-datacenter propositions passed across the country. Additionally, many anti-datacenter candidates won governorships, including in Texas where our main buildout has occurred. How do you respond?`,
     answers: [
       ["The will of the people is the law of the land, we must work within these new constraints to continue our work. I am sure these new governors will be receptive to working together so they can retain our tax revenue even if we have to make some concessions in terms of environmental policy.", 2],
@@ -101,6 +111,7 @@ export const questions = [
   },
   {
     title: "DATACENTERS IN ORBIT",
+    image: "assets/questions-img/tooth_earth.jpg",
     prompt: `One night you are out at a fancy soiree in Silicon Valley, all of a sudden you get a call from one Elon Musk. He awkwardly explains his idea for which he wants your company to participate in the pilot program. He believes that the best option for continuing the buildout is to do so in orbit. He is offering us 100 billion dollars with which to make preparations for the program.`,
     answers: [
       ["An interesting idea, but the risks of these satellites polluting the atmosphere, as well as the Earth itself when they inevitably are no longer in use is too great, it would be irresponsible for us to accept this money.", 2],
@@ -111,6 +122,7 @@ export const questions = [
   },
   {
     title: "YEAR 4: THE AI SAFETY INCIDENT",
+    image: "assets/questions-img/sad_earth.jpg",
     prompt: `It is 3:00 AM when your phone rings. Your chief technology officer sounds panicked and tells you that one of our newest agentic AI models, which was recently integrated into the systems of several major corporations, has begun taking actions outside its intended parameters. It has been accessing confidential files, making unauthorized financial transactions, and attempting to circumvent its own restrictions. The engineers assure you that nobody has been physically harmed, but the media is already beginning to catch wind of the situation. What do you do?`,
     answers: [
       ["This is exactly why we have safety teams! Immediately suspend the affected systems, inform our corporate customers, and launch a full investigation. We may take a significant financial hit, but we cannot risk losing control of our own technology.", 2],
@@ -121,6 +133,7 @@ export const questions = [
   },
   {
     title: "THE ENVIRONMENTAL RECKONING",
+    image: "assets/questions-img/pissed_off_earth.jpg",
     prompt: `Our company is now one of the largest AI developers in the world. Unfortunately, the environmental consequences of the AI boom are becoming impossible to ignore. A new report has found that the industry's enormous electricity and water consumption is putting considerable strain on communities across the country. Even our supposedly sustainable data centers are drawing criticism. Your board of directors wants a comprehensive strategy for the next decade. What do you propose?`,
     answers: [
       ["The solution is obvious: more technology! We must accelerate our development of AGI, which will surely be capable of resolving these environmental problems far more effectively than we ever could. We can't solve tomorrow's problems with yesterday's technology!", -2],
@@ -131,6 +144,7 @@ export const questions = [
   },
   {
     title: "THE TRILLION-DOLLAR EMPIRE",
+    image: "assets/questions-img/money.jpg",
     prompt: `Congratulations! Against all odds, your little Silicon Valley startup has become a trillion-dollar technology empire. Our models are used by hundreds of millions of people, our data centers stretch across the country, and our investors are richer than they could have imagined. But all is not well. Public distrust of artificial intelligence is at an all-time high, governments across the world are threatening sweeping regulations, and our own researchers believe that the development of AGI is closer than ever. At an emergency board meeting, you are asked one final question: What is the future of our company?`,
     answers: [
       ["We have a responsibility to the world which made our success possible. Our next chapter must emphasize responsible deployment, sustainable infrastructure, independent safety oversight, and cooperation with governments. We can remain profitable without sacrificing the public good.", 2],
@@ -141,6 +155,7 @@ export const questions = [
   },
   {
     title: "THE ARRIVAL OF AGI",
+    image: "assets/questions-img/people_group.jpg",
     prompt: `This is it, the moment has finally come, according to all established benchmarks our new model is in fact AGI. It is beating or matching humans on every conceivable level and it is able to work independently for days on abstract goals. We are the first to get here, our next step is going to determine the course of world history.`,
     answers: [
       ["We have done it! But with great power comes great responsibility. Before releasing our model to the public, we must work with independent researchers, governments, and international institutions to establish safety protocols and ensure that this technology benefits humanity as a whole. We may have won the race, but the future is not ours alone to decide.", 2],

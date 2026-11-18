@@ -1,41 +1,5 @@
 import { questions } from "./questions.js";
-
-// Earth illustration outcomes for the game
-const earthOutcomes = {
-  utopia: {
-    title: "A Sustainable Future",
-    label: "Utopia",
-    description:
-      "Your decisions prioritized responsible growth, environmental protection, and public accountability. Your company helped build a more sustainable future.",
-    image: "assets/endings/utopia.png", // name of img file for this outcome
-    icon: "✦",
-  },
-  hopeful: {
-    title: "A Future Worth Improving",
-    label: "Not Bad",
-    description:
-      "Your company balanced growth with some responsible decisions. The world still faces challenges, but there is room to improve.",
-    image: "assets/endings/not-bad.png", // name of img file for this outcome
-    icon: "◆",
-  },
-  damaged: {
-    title: "A World Under Strain",
-    label: "WALL-E",
-    description:
-      "Rapid technological expansion came at a significant environmental cost. Waste, resource consumption, and infrastructure demands have left lasting damage.",
-    image: "assets/endings/wall-e.png", // name of img file for this outcome
-    icon: "!",
-  },
-  collapse: {
-    title: "An Unsustainable Future",
-    label: "Environmental Collapse",
-    description:
-      "The pursuit of unchecked growth overwhelmed environmental safeguards and public accountability, leaving the planet in crisis.",
-    image: "assets/endings/collapse.png", // name of img file for this outcome
-    icon: "×",
-  },
-};
-
+import { earthOutcomes } from "./earth-outcomes-screen.js";
 
 const game = document.querySelector("#game");
 const soundButton = document.querySelector(".sound-toggle");
@@ -61,31 +25,37 @@ function playTone(frequency = 520, duration = 0.06) {
   oscillator.stop(audioContext.currentTime + duration);
 }
 
-
 function updateScenery(outcome = null) {
   const scenery = document.querySelector(".scenery");
+
+  if (!scenery) return;
+
   const image = scenery.querySelector(".ending-scene");
 
-  // Invalidate any previous image-loading callbacks.
+  if (!image) return;
+
+  // Use a taller container for the Earth results screen.
+  scenery.classList.toggle(
+    "earth-result",
+    screen === "ending"
+  );
+
+  // Prevent older image requests from changing the current screen.
   const requestId = String(
     Number(image.dataset.requestId || 0) + 1
   );
+
   image.dataset.requestId = requestId;
 
-  const isQuestion = screen === "question";
+  // Select the appropriate illustration.
+  const imagePath =
+    outcome?.image ??
+    (screen === "question"
+      ? questions[currentQuestion]?.image
+      : null);
 
-  const imagePath = outcome
-    ? outcome.image
-    : isQuestion
-      ? `assets/questions-img/question-${String(
-          currentQuestion + 1
-        ).padStart(2, "0")}.png`
-      : null;
-
-  scenery.classList.toggle(
-    "show-ending",
-    Boolean(imagePath)
-  );
+  // Show the default scenery until the image loads.
+  scenery.classList.remove("show-ending");
 
   image.hidden = true;
   image.onload = null;
@@ -93,11 +63,7 @@ function updateScenery(outcome = null) {
 
   if (!imagePath) {
     image.removeAttribute("src");
-    scenery.classList.remove("show-ending");
-    scenery.setAttribute(
-      "aria-label",
-      "Retro game scenery"
-    );
+    scenery.setAttribute("aria-label", "Retro game scenery");
     return;
   }
 
@@ -110,11 +76,13 @@ function updateScenery(outcome = null) {
   image.onload = () => {
     if (image.dataset.requestId === requestId) {
       image.hidden = false;
+      scenery.classList.add("show-ending");
     }
   };
 
   image.onerror = () => {
     if (image.dataset.requestId === requestId) {
+      console.error(`Failed to load image: ${imagePath}`);
       image.hidden = true;
       scenery.classList.remove("show-ending");
     }
@@ -122,8 +90,6 @@ function updateScenery(outcome = null) {
 
   image.src = imagePath;
 }
-
-
 
 function renderIntro() {
   screen = "intro";
@@ -299,22 +265,20 @@ function getOutcome() {
     (total, selection, index) => {
       if (selection === null) return total;
 
-      const score =
-        questions[index].answers[selection][1];
+      const score = questions[index].answers[selection][1];
 
-      return total +
-        (typeof score === "number" ? score : 0);
+      return total + (typeof score === "number" ? score : 0);
     },
     0
   );
 
   let outcomeKey;
 
-  if (totalScore >= 16) {
+  if (totalScore >= 18) {
     outcomeKey = "utopia";
-  } else if (totalScore >= 1) {
+  } else if (totalScore >= 6) {
     outcomeKey = "hopeful";
-  } else if (totalScore >= -14) {
+  } else if (totalScore >= -8) {
     outcomeKey = "damaged";
   } else {
     outcomeKey = "collapse";
@@ -326,64 +290,126 @@ function getOutcome() {
   };
 }
 
+function renderRecommendations(items) {
+  return items
+    .map(
+      (item, index) => `
+        <div class="recommendation-item">
+          <span aria-hidden="true">
+            › ${String.fromCharCode(65 + index)}
+          </span>
+          <span>${item}</span>
+        </div>
+      `
+    )
+    .join("");
+}
+
 function renderEnding() {
   screen = "ending";
+
   const { totalScore, outcome } = getOutcome();
-  window.dispatchEvent(new CustomEvent("quiz:completed", {
-    detail: { winner: outcome.label, totalScore,
-      answers: selections.map((answer) => answer + 1) },
-  }));
-  updateScenery(outcome);
+
+  // Preserve the event consumed by results.js.
+  window.dispatchEvent(
+    new CustomEvent("quiz:completed", {
+      detail: {
+        winner: outcome.label,
+        totalScore,
+        answers: selections.map((answer) => answer + 1),
+      },
+    })
+  );
+
+  // Display the selected Earth's illustration.
+  // updateScenery(outcome);
 
   game.innerHTML = `
-    <p class="eyebrow">
-      Your decisions have shaped the future
-    </p>
-
-    <div class="ending-card">
-      <p class="eyebrow">
-        ${outcome.icon} YOUR EARTH OUTCOME
-      </p>
-
-      <h1 class="ending-title" tabindex="-1">
-        ${outcome.title}
-      </h1>
-
-      <p class="ending-copy">
-        ${outcome.description}
-      </p>
-
-      <div class="ending-stats">
-        <div class="stat">
-          <span class="stat-label">
-            Sustainability Score
-          </span>
-          <span class="stat-value">
-            ${totalScore} / +30
-          </span>
-        </div>
+    <div class="final-progress">
+      <div class="progress-label">
+        <span>FINAL RESULT</span>
+        <span>YOUR EARTH</span>
       </div>
 
-      <div class="ending-actions">
-        <button class="restart-button"
-                type="button"
-                data-action="restart">
-          PLAY AGAIN ↻
-        </button>
-
-        <button class="back-button"
-                type="button"
-                data-action="review">
-          ← Review last choice
-        </button>
+      <div
+        class="final-progress-track"
+        role="progressbar"
+        aria-label="Decisions completed"
+        aria-valuemin="0"
+        aria-valuemax="${questions.length}"
+        aria-valuenow="${questions.length}"
+      >
+        <div class="final-progress-fill"></div>
       </div>
+
+      <p class="trail-marker">
+        ${questions.length} / ${questions.length}
+        DECISIONS COMPLETED · 100%
+      </p>
     </div>
 
-    <p class="ending-footnote">
-      Your outcome reflects the cumulative impact
-      of your decisions throughout the simulation.
-    </p>
+    <h1 class="earth-heading" tabindex="-1">
+      ${outcome.title}
+    </h1>
+
+    <div class="earth-score-row">
+      <span class="earth-score">
+        QUIZ SCORE: ${totalScore} POINTS
+      </span>
+
+      <span class="earth-range">
+        ${outcome.scoreRange}
+      </span>
+    </div>
+
+    <section class="earth-section" aria-label="Strengths">
+      <h2>› STRENGTHS</h2>
+      <p>${outcome.strengths}</p>
+    </section>
+
+    <section class="earth-section" aria-label="Weaknesses">
+      <h2>› WEAKNESSES</h2>
+      <p>${outcome.weaknesses.replace(/\n\n/g, "<br><br>")}</p>
+    </section>
+
+    <section
+      class="earth-recommendations"
+      aria-label="Recommendations"
+    >
+      <h2>› RECOMMENDATIONS</h2>
+
+      <div class="recommendation-columns">
+        <div>
+          <h3>ACCESSIBLE OPTIONS:</h3>
+          ${renderRecommendations(outcome.accessible)}
+        </div>
+
+        <div>
+          <h3>LESS ACCESSIBLE OPTIONS:</h3>
+          ${renderRecommendations(outcome.lessAccessible)}
+        </div>
+      </div>
+    </section>
+
+    <div class="ending-actions earth-actions">
+      <button
+        class="back-button"
+        type="button"
+        data-action="review"
+      >
+        ‹ REVIEW LAST CHOICE
+      </button>
+
+      <button
+        class="restart-button"
+        type="button"
+        data-action="restart"
+      >
+        PLAY AGAIN ›
+      </button>
+    </div>
   `;
+  updateScenery(outcome);
 }
 
 function renderQuit() {

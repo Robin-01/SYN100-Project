@@ -325,3 +325,154 @@ html.fullscreen-fallback { position: fixed; inset: 0; z-index: 10; overflow-y: a
     transition: none;
   }
 }
+
+/* ======================================
+   DETAILED EARTH RESULT SCREENS
+   ====================================== */
+
+.final-progress {
+  margin-bottom: 24px;
+}
+
+.final-progress-track {
+  height: 16px;
+  padding: 2px;
+  border: 2px solid var(--accent);
+}
+
+.final-progress-fill {
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+}
+
+.earth-heading {
+  font-size: clamp(26px, 6vw, 48px);
+  line-height: 1.25;
+  margin: 24px 0 12px;
+}
+
+.earth-score-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.earth-symbol {
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+}
+
+.earth-score {
+  padding: 8px 12px;
+  border: 2px solid var(--line);
+  color: var(--accent);
+}
+
+.earth-range {
+  color: var(--muted-ink);
+  font-size: 12px;
+}
+
+.earth-section {
+  padding: 16px;
+  margin-bottom: 14px;
+  border: 2px solid var(--line);
+  background: #001a08;
+}
+
+.earth-section h2,
+.earth-recommendations h2 {
+  color: var(--ink);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.earth-section p {
+  margin: 0;
+  line-height: 1.65;
+  font-size: 13px;
+}
+
+.earth-recommendations {
+  margin-top: 22px;
+}
+
+.recommendation-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.recommendation-columns h3 {
+  font-size: 12px;
+  font-weight: normal;
+  color: var(--accent);
+}
+
+.recommendation-item {
+  display: flex;
+  gap: 12px;
+  border: 2px solid var(--line);
+  padding: 10px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+  font-size: 12px;
+}
+
+.recommendation-item span:first-child {
+  flex: 0 0 24px;
+  color: var(--ink);
+}
+
+.earth-actions {
+  justify-content: space-between;
+  margin-top: 22px;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .recommendation-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .earth-section {
+    padding: 12px;
+  }
+}
+
+/* Keep question illustrations inside the existing banner */
+.scenery .ending-scene {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Give Earth illustrations more vertical space */
+.scenery.earth-result {
+  height: 340px;
+  min-height: 340px;
+  background: #000;
+}
+
+.scenery.earth-result .ending-scene {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 600px) {
+  .scenery.earth-result {
+    height: 260px;
+    min-height: 260px;
+  }
+}
